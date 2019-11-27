@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="GIRISH K PATHAK">
+
+  <title>Pittsburgh Muncipality MAP || MAP Page</title>
+  <!-- Custom fonts for this template-->
+  <!-- <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Custom styles for this template-->
+ 
+  <link href="css/sb-admin.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css"/>
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css"/>
+  
+</head>
+
+<body id="page-top">
+
+  <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+    <a class="navbar-brand mr-1" href="index.html">
+      <!-- Beam Data -->
+      <span><img src="js/images/logo.png" class="logo"/>  </span>
+    </a>
+
+    <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="" href="#">
+      <i class="fa fa-navicon"></i>
+    </button>
+
+    <!-- Navbar Search -->
+    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="button">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <!-- Navbar -->
+    <ul class="navbar-nav ml-auto ml-md-0">    
+      
+      <li class="nav-item dropdown no-arrow">
+        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <!-- <i class="fas fa-user-circle fa-fw"></i> -->
+          <i class="fas fa fa-user-circle-o"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+          <a class="dropdown-item" href="#">Settings</a>
+          <a class="dropdown-item" href="#">Activity Log</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="sidebar toggled navbar-nav">     
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown"
+             role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-circle"></i>
+          <span>Details</span>
+        </a>
+        <div class="dropdown-menu details" aria-labelledby="pagesDropdown" id="details">         
+          <span id="close" class="close" onclick="close_panel(this)">x</span>
+          <p class="details-header">Municipality: Wilkinsburg</p>
+          <hr/>
+          <dl class="multiple-table">
+              <dt>Low Response Score:</dt>
+              <dd><p id="low-mod-percent">00.00%</p> </dd>
+          </dl>
+          <figure>
+              <div id="container">
+                <div id="line-bar" class="line-bar"></div>              
+              </div> 
+              <figcaption>Score Percentile</figcaption>
+            </figure>
+              <p class="block-info-header">This block has x conditions than x% of other Wilkinsburg block groups.</p>
+              <hr class="hr-line"/>            
+              <span>Block information </span>
+              <dl class="multiple-table">            
+                  <dt>Zip Code:</dt>
+                  <dd>40.05% </dd>
+                  <dt>Population:</dt>
+                  <dd>40.05% </dd>
+              </dl>
+              <hr class="hr-line"/>      
+              <dl class="multiple-table">            
+                  <dt>                     
+                      <div id="poverty">
+                          <div id="poverty-bar" class="line-bar" style="height: 25px;margin-top: -2px;"></div>
+                      </div>
+                  </dt>
+                  <dd>Below poverty: 33% </dd>
+                  <!-- <dt>                      
+                      <div id="white"></div>
+                  </dt>                  
+                  <dd>White: 27.8% </dd>      
+                  <dt>                    
+                      <div id="poverty-new"></div>
+                  </dt>
+                  <dd>Below poverty: 33% </dd>
+                  <dt>                      
+                      <div id="white-new"></div>
+                  </dt>
+                  
+                  <dd>White: 27.8% </dd> -->
+              </dl>        
+        </div>
+      </li>      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="indicators" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-binoculars"></i>
+          <span>Indicators</span>
+        </a>
+        <div class="dropdown-menu details" aria-labelledby="indicators">
+          <div id="indicator-demographic">
+          <span class="close" onclick="close_panel(this)">x</span>
+          <h6 class="dropdown-header indicator-header-list">View Indicators</h6>
+           <hr class="hr-line"/> 
+          <p class="block-info-header indicator-info">Select an indicator to view on the map. Expand indicator categories to see more. 
+          </p>
+           <hr class="hr-line"/> 
+          <!-- <h6 class="dropdown-header">Demographic</h6>  -->
+          <div class="accordion" id="demographic">
+              <div class="card">
+                <div class="card-header" id="headingOne">
+                  <h2 class="mb-0">
+                    <button  type="button" class="btn btn-indicator-list btn-lg btn-block" onclick="collapseCard(this)" datatarget="#collapseOne">
+                        Demographic
+                    </button>
+                  </h2>
+                </div>
+            
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#demographic">
+                  <div class="card-body">
+                      <table class="table borderless">                
+                          <tbody>
+                            <tr>                    
+                              <td>
+                                <button type="button" class="btn btn-indicator">White</button>
+                              </td>
+                              <td>
+                                  <button type="button" class="btn btn-ico" data-toggle="tooltip" 
+                                          data-placement="right" title="Details" onclick="indicator_content('White', 'Demographic')">
+                                      <i class="fa fa-info"></i>
+                                  </button>
+                              </td>
+                              <td>
+                                <button type="button" class="btn btn-ico" data-toggle="tooltip" data-placement="right" title="View On Map">
+                                    <i class="fa fa-map"></i>
+                                </button>
+                              </td>
+                            </tr>
+                            <tr>                    
+                              <td>
+                                <button type="button" class="btn btn-indicator">Black</button>
+                              </td>
+                              <td>
+                                  <button type="button" class="btn btn-ico" data-toggle="tooltip" 
+                                    data-placement="right" title="Details" onclick="indicator_content('Black', 'Demographic')">
+                                      <i class="fa fa-info"></i>
+                                  </button>
+                              </td>
+                              <td>
+                                  <button type="button" class="btn btn-ico" data-toggle="tooltip" data-placement="right" title="View On Map">
+                                      <i class="fa fa-map"></i>
+                                  </button>
+                              </td>
+                            </tr>
+                            <tr>                    
+                              <td>
+                                <button type="button" class="btn btn-indicator">Hispanic</button>
+                              </td>
+                              <td>
+                                  <button type="button" class="btn btn-ico" data-toggle="tooltip" 
+                                          data-placement="right" title="Details" onclick="indicator_content('Hispanic', 'Demographic')">
+                                      <i class="fa fa-info"></i>
+                                  </button>
+                              </td>
+                              <td>
+                                  <button type="button" class="btn btn-ico" data-toggle="tooltip" data-placement="right" title="View On Map">
+                                      <i class="fa fa-map"></i>
+                                  </button>
+                              </td>
+                            </tr>
+                            <tr>                    
+                              <td>
+                                <button type="button" class="btn btn-indicator">Adult 65+</button>
+                              </td>
+                              <td>
+                                  <button type="button" class="btn btn-ico" data-toggle="tooltip" 
+                                          data-placement="right" title="Details" onclick="indicator_content('Adult 65+', 'Demographic')">
+                                      <i class="fa fa-info"></i>
+                                  </button>
+                              </td>
+                              <td>
+                                  <button type="button" class="btn btn-ico" data-toggle="tooltip" data-placement="right" title="View On Map">
+                                      <i class="fa fa-map"></i>
+                                  </button>
+                              </td>
+                            </tr>
+                            <tr>                    
+                              <td>
+                                <button type="button" class="btn btn-indicator">18-24 yrs</button>
+                              </td>
+                              <td>
+                                  <button type="button" class="btn btn-ico" data-toggle="tooltip" 
+                                          data-placement="right" title="Details"  onclick="indicator_content('18-24 yrs', 'Demographic')">
+                                      <i class="fa fa-info"></i>
+                                  </button>
+                              </td>
+                              <td>
+                                  <button type="button" class="btn btn-ico" data-toggle="tooltip" data-placement="right" title="View On Map">
+                                      <i class="fa fa-map"></i>
+                                  </button>
+                              </td>
+                            </tr>
+                            <tr>                    
+                              <td>
+                                <button type="button" class="btn btn-indicator">Under 6 yrs</button>
+                              </td>
+                              <td>
+                                  <button type="button" class="btn btn-ico" data-toggle="tooltip" 
+                                        data-placement="right" title="Details" onclick="indicator_content('Under 6 yrs', 'Demographic')">
+                                      <i class="fa fa-info"></i>
+                                  </button>
+                              </td>
+                              <td>
+                                  <button type="button" class="btn btn-ico" data-toggle="tooltip" data-placement="right" title="View On Map">
+                                      <i class="fa fa-map"></i>
+                                  </button>
+                              </td>
+                            </tr>
+                            <tr>                    
+                              <td>
+                                <button type="button" class="btn btn-indicator">Males</button>
+                              </td>
+                              <td>
+                                  <button type="button" class="btn btn-ico" data-toggle="tooltip" 
+                                          data-placement="right" title="Details" onclick="indicator_content('Males', 'Demographic')">
+                                      <i class="fa fa-info"></i>
+                                  </button>
+                              </td>
+                              <td>
+                                  <button type="button" class="btn btn-ico" data-toggle="tooltip" data-placement="right" title="View On Map">
+                                      <i class="fa fa-map"></i>
+                                  </button>
+                              </td>
+                            </tr>
+                            <tr>                    
+                              <td>
+                                <button type="button" class="btn btn-indicator">Single Parent</button>
+                              </td>
+                              <td>
+                                  <button type="button" class="btn btn-ico" data-toggle="tooltip" 
+                                          data-placement="right" title="Details"  onclick="indicator_content('Single Parent', 'Demographic')">
+                                      <i class="fa fa-info"></i>
+                                  </button>
+                              </td>
+                              <td>
+                                  <button type="button" class="btn btn-ico" data-toggle="tooltip" data-placement="right" title="View On Map">
+                                      <i class="fa fa-map"></i>
+                                  </button>
+                              </td>
+                            </tr>
+                            <tr>                    
+                              <td>
+                                <button type="button" class="btn btn-indicator">LRS</button>
+                              </td>
+                              <td>
+                                  <button type="button" class="btn btn-ico" data-toggle="tooltip" 
+                                        data-placement="right" title="Details"   onclick="indicator_content('LRS', 'Demographic')">
+                                      <i class="fa fa-info"></i>
+                                  </button>
+                              </td>
+                              <td>
+                                  <button type="button" class="btn btn-ico" data-toggle="tooltip" data-placement="right" title="View On Map">
+                                      <i class="fa fa-map"></i>
+                                  </button>
+                              </td>
+                            </tr>
+                            <tr>                    
+                              <td>
+                                <button type="button" class="btn btn-indicator">Mail Return</button>
+                              </td>
+                              <td>
+                                  <button type="button" class="btn btn-ico" data-toggle="tooltip" 
+                                        data-placement="right" title="Details" onclick="indicator_content('Mail Return', 'Demographic')">
+                                      <i class="fa fa-info"></i>
+                                  </button>
+                              </td>
+                              <td>
+                                  <button type="button" class="btn btn-ico" data-toggle="tooltip" data-placement="right" title="View On Map">
+                                      <i class="fa fa-map"></i>
+                                  </button>
+                              </td>
+                            </tr>
+                            <tr>                    
+                              <td>
+                                <button type="button" class="btn btn-indicator">Population</button>
+                              </td>
+                              <td>
+                                  <button type="button" class="btn btn-ico" data-toggle="tooltip" 
+                                          data-placement="right" title="Details" onclick="indicator_content('Population', 'Demographic')">
+                                      <i class="fa fa-info"></i>
+                                  </button>
+                              </td>
+                              <td>
+                                  <button type="button" class="btn btn-ico" data-toggle="tooltip" data-placement="right" title="View On Map">
+                                      <i class="fa fa-map"></i>
+                                  </button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header" id="headingTwo">
+                  <h2 class="mb-0">
+                    <button  type="button" class="btn btn-indicator-list btn-lg btn-block collapsed" onclick="collapseCard(this)" datatarget="#collapseTwo">
+                        Economic
+                    </button>
+                  </h2>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                  <div class="card-body">
+                    <table class="table borderless">                
+                    <tbody>
+                      <tr>                    
+                        <td>
+                          <button type="button" class="btn btn-indicator">Below Poverty</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-ico" data-toggle="tooltip" 
+                                    data-placement="right" title="Details" onclick="indicator_content('Below Poverty', 'Economic')">
+                                <i class="fa fa-info"></i>
+                            </button>
+                        </td>
+                        <td>
+                          <button type="button" class="btn btn-ico" data-toggle="tooltip" data-placement="right" title="View On Map">
+                              <i class="fa fa-map"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>                    
+                        <td>
+                          <button type="button" class="btn btn-indicator">No high school</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-ico" data-toggle="tooltip" 
+                              data-placement="right" title="Details" onclick="indicator_content('No high school', 'Economic')">
+                                <i class="fa fa-info"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-ico" data-toggle="tooltip" data-placement="right" title="View On Map">
+                                <i class="fa fa-map"></i>
+                            </button>
+                        </td>
+                      </tr>
+                      <tr>                    
+                        <td>
+                          <button type="button" class="btn btn-indicator">Median income</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-ico" data-toggle="tooltip" 
+                                    data-placement="right" title="Details" onclick="indicator_content('Median income', 'Economic')">
+                                <i class="fa fa-info"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-ico" data-toggle="tooltip" data-placement="right" title="View On Map">
+                                <i class="fa fa-map"></i>
+                            </button>
+                        </td>
+                      </tr>                                        
+                    </tbody>
+                  </table>
+                  </div>
+                </div>
+              </div> 
+              
+              <div class="card">
+                <div class="card-header" id="headingThree">
+                  <h2 class="mb-0">
+                    <button  type="button" class="btn btn-indicator-list btn-lg btn-block collapsed" onclick="collapseCard(this)" datatarget="#collapseThree">
+                      Housing
+                    </button>
+                  </h2>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                  <div class="card-body">
+                    <table class="table borderless">                
+                      <tbody>
+                        <tr>                    
+                          <td>
+                            <button type="button" class="btn btn-indicator">Renter Occupied</button>
+                          </td>
+                          <td>
+                              <button type="button" class="btn btn-ico" data-toggle="tooltip" 
+                                      data-placement="right" title="Details" onclick="indicator_content('Renter Occupied', 'Housing')">
+                                  <i class="fa fa-info"></i>
+                              </button>
+                          </td>
+                          <td>
+                            <button type="button" class="btn btn-ico" data-toggle="tooltip" data-placement="right" title="View On Map">
+                                <i class="fa fa-map"></i>
+                            </button>
+                          </td>
+                        </tr>
+                        <tr>                    
+                          <td>
+                            <button type="button" class="btn btn-indicator">Vacant Units</button>
+                          </td>
+                          <td>
+                              <button type="button" class="btn btn-ico" data-toggle="tooltip" 
+                                data-placement="right" title="Details" onclick="indicator_content('Vacant Units', 'Housing')">
+                                  <i class="fa fa-info"></i>
+                              </button>
+                          </td>
+                          <td>
+                              <button type="button" class="btn btn-ico" data-toggle="tooltip" data-placement="right" title="View On Map">
+                                  <i class="fa fa-map"></i>
+                              </button>
+                          </td>
+                        </tr>
+                        <tr>                    
+                          <td>
+                            <button type="button" class="btn btn-indicator">Move after 2010</button>
+                          </td>
+                          <td>
+                              <button type="button" class="btn btn-ico" data-toggle="tooltip" 
+                                      data-placement="right" title="Details" onclick="indicator_content('Move after 2010', 'Housing')">
+                                  <i class="fa fa-info"></i>
+                              </button>
+                          </td>
+                          <td>
+                              <button type="button" class="btn btn-ico" data-toggle="tooltip" data-placement="right" title="View On Map">
+                                  <i class="fa fa-map"></i>
+                              </button>
+                          </td>
+                        </tr>                                        
+                        <tr>                    
+                          <td>
+                            <button type="button" class="btn btn-indicator">Housing Value</button>
+                          </td>
+                          <td>
+                              <button type="button" class="btn btn-ico" data-toggle="tooltip" 
+                                      data-placement="right" title="Details" onclick="indicator_content('Housing Value', 'Housing')">
+                                  <i class="fa fa-info"></i>
+                              </button>
+                          </td>
+                          <td>
+                              <button type="button" class="btn btn-ico" data-toggle="tooltip" data-placement="right" title="View On Map">
+                                  <i class="fa fa-map"></i>
+                              </button>
+                          </td>
+                        </tr>                                        
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header" id="headingFour">
+                  <h2 class="mb-0">
+                    <button  type="button" class="btn btn-indicator-list btn-lg btn-block collapsed" onclick="collapseCard(this)" datatarget="#collapseFour">
+                      Education
+                    </button>
+                  </h2>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                  <div class="card-body">
+                    <table class="table borderless">                
+                      <tbody>
+                        <tr>                    
+                          <td>
+                            <button type="button" class="btn btn-indicator">Graduate</button>
+                          </td>
+                          <td>
+                              <button type="button" class="btn btn-ico" data-toggle="tooltip" 
+                                      data-placement="right" title="Details" onclick="indicator_content('Graduate', 'Education')">
+                                  <i class="fa fa-info"></i>
+                              </button>
+                          </td>
+                          <td>
+                            <button type="button" class="btn btn-ico" data-toggle="tooltip" data-placement="right" title="View On Map">
+                                <i class="fa fa-map"></i>
+                            </button>
+                          </td>
+                        </tr>
+                        </tbody>
+                        </table> 
+                  </div>
+                </div>
+              </div>
+          </div>              
+           <hr class="hr-line"/> 
+           </div>
+           <!-- <button type="button" id="demo-btn" class="btn btn-primary float-left ml-4 mb-3 d-none p-1" onclick="indicator_content()">Back</button> -->
+           <!-- <span class="close" onclick="close_panel(this)">x</span> -->
+           <div class="d-none demo-content">
+                <button type="button" id="demo-btn" class="btn btn-indicator-list" onclick="indicator_back()">
+                    <i class="fa fa-angle-left"> Back</i>
+                  </button>
+                <h6 class="dropdown-header indicator-header-list">White</h6>
+                  <hr class="hr-line"/> 
+                <p class="indicator-questions">
+                    What does this variable measure? 
+                </p>
+                <p class="indicator-answers" id="indicator-definition">
+                    All occupied housing units which are not owner-occupied, whether they are rented or occupied without payment of rent, are classified as renter-occupied.  
+                </p>
+                <hr class="hr-line"/> 
+                <!-- <p class="indicator-questions">
+                    What is the connection to the Census? 
+                </p>
+                <p class="indicator-answers" id="indicator-conection">
+                    ............ 
+                </p>
+                  <hr class="hr-line"/>  -->
+            </div>
+          </div>
+      </li> 
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="rank" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-level-up"></i>
+              <span>Rank</span>
+          </a>
+          <div class="dropdown-menu details" aria-labelledby="rank" style="height: 350px;">
+            <div id="indicators-content">
+            <span class="close" onclick="close_panel(this)">x</span>
+            <h6 class="dropdown-header rank-header-list">Rank</h6>
+             <hr class="hr-line"/> 
+            <p class="block-info-header rank-info">Select locations using the search bar. Census blocks within your selected geography will then be ranked by the selected indicators. 
+            </p>
+             <hr class="hr-line"/> 
+            <!-- <h6 class="dropdown-header">Demographic</h6>  -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="control-group auto-search">
+                            <!-- <label for="input-tags">Tags:</label> -->
+                            <input type="text" id="input-tags" 
+                            placeholder="Ex: Wilkinsburg, Braddock"
+                            class="" 
+                            value=""/>
+                            <small class="form-text help-txt text-muted">Select maximum of 3 boroughs.</small>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="control-group auto-search">
+                            <!-- <label for="input-tags">Tags:</label> -->
+                            <input type="text" id="variables" 
+                            placeholder="Ex: Wilkinsburg, Braddock"
+                            class="" 
+                            value="">
+                            <small class="form-text help-txt text-muted">Select maximum of 3 indicators.</small>
+                          </div>                      
+                    </div>
+                </div>
+                <br/>             
+            </div>
+                
+             <hr class="hr-line"/>             
+          </div>
+          <button type="button" class="btn btn-indicator-list rank-btn" onclick="rank_content(this)">Submit</button>
+          <hr class="hr-line"/>
+          <table class="table d-none" id="table">
+           
+          </table>
+        </div>
+        </li> 
+      <!-- <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dataupload" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-cloud-upload"></i>
+          <span>Data Upload</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dataupload">
+          <h6 class="dropdown-header">Data Upload:</h6>
+         
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="report" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-file-pdf-o"></i>
+          <span>Report/Export</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="report">
+          <h6 class="dropdown-header">Export:</h6>
+        
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="about" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-question"></i>
+          <span>About</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="about">
+          <h6 class="dropdown-header">About:</h6>
+         
+        </div>
+      </li>  -->
+    </ul>
+
+    <div id="content-wrapper">
+      <div id="map">
+          <div class="l-center">
+              <p>Hard-to-Count Communities</p>
+              <div class="blk-grp" id="geo-level">Block group</div>
+              <div class="blk-grp" id="geo-location">Wilkinsburg</div>
+              <div class="info-footer">Drag to change map display</div>
+           </div>
+      </div>     
+
+      <!-- Sticky Footer -->
+      <footer class="sticky-footer">
+        <div class="container-fluid my-auto">
+          <div class="copyright text-right font-weight-bold my-auto">
+            <span>Copyright © <img src="js/images/logo.png" class="logo"/>  </span>
+              <!-- вєαm dαtα survєч 2019 -->
+          </div>
+        </div>
+      </footer>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin.min.js"></script>
+  <script src="vendor/leaflet/leaflet.js"></script>
+  <script src="vendor/leaflet/leaflet.ajax.min.js"></script>
+  <script src="vendor/d3/d3.v5.min.js"></script>
+  <script src="vendor/d3/d3-legend.min.js"></script>
+  <script src="js/constant.js"></script>    
+  <script src="js/main.js"></script>    
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jqueryui.js"></script>
+  <script src="js/selectize.min.js"></script>  
+  <script src="js/index.js"></script>
+  <script>
+    // $('#input-tags').selectize({
+		// 			delimiter: ',',
+		// 			persist: false,
+		// 			onDelete: function(values) {
+		// 				return confirm(values.length > 1 ? 'Are you sure you want to remove these ' + values.length + ' items?' : 'Are you sure you want to remove "' + values[0] + '"?');
+    //       },
+          
+    //     });
+
+  
+    // let muncipality, variables = [ 
+    //   {"variable":"Female_No_HB_CEN_2010"}, {"variable":"NH_White_alone_CEN_2010"},
+    //   {"variable":"Pop_65plus_CEN_2010"}, {"variable":"Rel_Under_6_CEN_2010"},
+    //   {"variable":"Males_CEN_2010"}, {"variable":"MrdCple_HHD_CEN_2010"}, 
+    //   {"variable":"Pop_25_44_CEN_2010"}, {"variable":"Vacant_Units_CEN_2010"}, 
+    //   {"variable":"College_ACS_10_14"}, {"variable":"Med_HHD_Inc_BG_ACS_10_14"}, 
+    //   {"variable":"Pop_45_64_CEN_2010"},{"variable":"Tot_Prns_in_HHD_CEN_2010"}, 
+    //   {"variable":"HHD_Moved_in_ACS_10_14"}, {"variable":"Hispanic_CEN_2010"}, 
+    //   {"variable":"Single_Unit_ACS_10_14"}, {"variable":"Tot_Population_CEN_2010"}, 
+    //   {"variable":"Prs_Blw_Pov_Lev_ACS_10_14"},  {"variable":"Diff_HU_1yr_Ago_ACS_10_14"}, 
+    //   {"variable":"Pop_5_17_CEN_2010"}, {"variable":"NH_Blk_alone_CEN_2010"}, 
+    //   {"variable":"Sngl_Prns_HHD_CEN_2010"}, {"variable":"Not_HS_Grad_ACS_10_14"}, 
+    //   {"variable":"Med_House_Value_BG_ACS_10_14"}, {"variable":"Low_Response_Score"}, 
+    //   {"variable":"Mail_Return_Rate_CEN_2010"}];
+
+    //   $.getJSON("data/blkgrp_lowmod2015_muncipal.geojson",blkgrp_data=>{
+    //       muncipality = [...new Set(blkgrp_data.features.map(x => x.properties))]
+    //   });
+ 
+      
+    // $('#input-tags').selectize({
+    //         valueField: 'Muncipality',
+    //         labelField: 'Muncipality',
+    //         searchField: 'Muncipality',
+    //         persist: true,
+    //         createOnBlur: true,	          
+    //         openOnFocus: false,
+	  //         closeAfterSelect: true,
+    //         maxItems: 3,
+    //         options: [],
+    //         load: function(query, callback) {
+             
+    //           if (!query.length) return callback();
+    //           callback(muncipality);              
+    //         },
+                    
+    //     });
+    //     $('#variables').selectize({
+    //         valueField: 'variable',
+    //         labelField: 'variable',
+    //         searchField: 'variable',
+    //         persist: true,
+    //         createOnBlur: true,	          
+    //         openOnFocus: false,
+	  //         closeAfterSelect: true,
+    //         maxItems: 3,
+    //         options: [],
+    //         load: function(query, callback) {
+    //           if (!query.length) return callback();
+             
+    //           callback(variables);              
+    //         }               
+    //     });
+
+
+      </script>
+</body>
+
+</html>
