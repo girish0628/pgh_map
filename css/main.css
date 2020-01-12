@@ -3,6 +3,7 @@ body {
     margin: 0;
     font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif; 
 }
+
 html, body, #map {
     height: 100%;
     width: 100%;
@@ -72,10 +73,11 @@ html, body, #map {
   overflow: hidden;
 }
 .l-center > p{
-  font-size: 20px;
+  font-size: 1.5rem;
   font-weight: bold;
   line-height: 21px;
-  text-align: right;
+  text-align: center;
+  font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
 }
 .info-footer{
   background: #ffffffa3;
@@ -132,7 +134,7 @@ html, body, #map {
   font-size: 1.2rem;
   color: #000000;
   transform: translate(0%, -50%);
-  margin-top: 10px;
+  margin: 10px;
 }
 .block-info-header{
   white-space: pre-wrap;
@@ -276,6 +278,7 @@ dl.multiple-table dd.first { border-top: 1px solid #999; }
   height: 55px;
   width: 2px;
   margin-top: -5px;
+  margin-left: 0px;
   transition: all 1s 10ms;
   /* display: none; */
 }
@@ -293,28 +296,74 @@ dl.multiple-table dd.first { border-top: 1px solid #999; }
 }
 
 .btn-indicator{
+  width: 85%;
+  color: #fff;
+  background-color: #A6A6A6;
+  border-color: #A6A6A6;
+  white-space: normal;
+  font-size: 14px;
+  outline: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.btn-indicator:hover{
+  width: 85%;
+  color: #fff;
+  background-color: #A6A6A6;
+  border-color: #A6A6A6;
+  white-space: normal;
+  font-size: 14px;
+  cursor: default; 
+  outline: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.btn-indicator-rnk{
   width: 100px;
   color: #fff;
   background-color: #A6A6A6;
   border-color: #A6A6A6;
+  white-space: normal;
+  font-size: 14px;
 }
-.btn-indicator:hover{
+.btn-indicator-rnk:hover{
   width: 100px;
   color: #fff;
-  background-color: #2EA5AA;
-  border-color: #2EA5AA;
+  background-color: #A6A6A6;
+  border-color: #A6A6A6;
+  white-space: normal;
+  font-size: 14px;
 }
 .btn-ico{
   color: #fff;
   background-color: #E1B355;
   border-color: #E1B355;
   width: 40px;
+  font-size: 14px;
+  padding: 5px 0;
 }
 .btn-ico:hover{
   color: #fff;
   background-color:  rgb(245, 156, 47);
   border-color: rgb(245, 156, 47);
   width: 40px;
+  font-size: 14px;
+  padding: 5px 0;
+}
+.btn-upload{
+  color: #fff;
+  background-color: #E1B355;
+  border-color: #E1B355;
+  width: 100%;
+}
+.btn-upload:hover{
+  color: #fff;
+  background-color:  rgb(245, 156, 47);
+  border-color: rgb(245, 156, 47);
+  width: 100%;
+}
+.btn-upload:focus{
+  outline: none;
 }
 .btn-indicator-list{
   /* width: 100px; */
@@ -342,9 +391,39 @@ dl.multiple-table dd.first { border-top: 1px solid #999; }
   position: absolute;
   left: 4px;
   padding: 1px 6px;
+  margin: 10px;
+}
+#demo-btn{
+  /* background: rgba(55, 172, 204, 0.84); */
+  background-color: #2EA5AA;
+  color: white;
+  padding: 2px 8px;
+  position: absolute;
+  top: 0;
 }
 #demo-btn:focus{
   outline: none;
+}
+.rank-btn-back { 
+  font: inherit;
+  float: left; 
+  margin: 3px;
+  background-color: #2EA5AA;
+  color: white;
+  padding: 2px 8px;
+  top: 0;
+  font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
+  font-size: 16px;
+}
+.rank-btn-back:hover{
+  float: left; 
+  margin: 3px;
+  border-color: #2EA5AA;
+  color: white;
+  padding: 2px 8px;
+  top: 0;
+  font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
+  font-size: 16px;
 }
 .indicator-questions{
   font-size: medium;
@@ -352,7 +431,7 @@ dl.multiple-table dd.first { border-top: 1px solid #999; }
   padding: 0 20px;
   font-weight: bolder;
   margin-bottom: 5px;
-  color: rgb(79,98, 40);
+  /* color: rgb(79,98, 40); */
 }
 .help-txt{
   margin-top: -0.25rem;
@@ -361,7 +440,7 @@ dl.multiple-table dd.first { border-top: 1px solid #999; }
   font-size: smaller;
   text-align: justify;
   padding: 0 20px;
-  font-weight: bolder;
+  /* font-weight: bolder; */
   margin-bottom: 15px;
   color: rgb(23, 24, 22);
   white-space: normal;
@@ -379,3 +458,174 @@ dl.multiple-table dd.first { border-top: 1px solid #999; }
   background-image: none !important;
   border: 1px solid #a6a6a6 !important;
 }
+/* .table th, .table td {
+  border-top: none;
+} */
+
+/* .upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.btn-upload {
+  border: 2px solid gray;
+  color: #f5f2f2;
+  background-color: #A6A6A6;
+  padding: 5px 30%;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+} */
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 10px;
+  transition: 0.3s;
+  font-size: 17px;
+  width: 50%;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+#data-upload-panel{
+  -webkit-transition: opacity 600ms, visibility 600ms;
+  transition: opacity 1800ms, visibility 600ms;
+}
+#data-repo{
+  -webkit-transition: opacity 600ms, visibility 600ms;
+  transition: opacity 600ms, visibility 600ms;
+}
+#data-upload-panel > p{
+  white-space: normal;
+  text-align: justify;
+  /* font-size: 12px; */
+  font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
+}
+.list-upload-data{
+  text-align: justify;
+  list-style-type: initial;
+  white-space: normal;
+  text-align: justify;
+}
+.repo-content {
+  background: #ffffffcf;
+  text-align: center;
+  width: 450px;
+  font-size: 15px;
+  -webkit-box-shadow: 10px 10px 5px -8px rgba(138,135,138,1);
+  -moz-box-shadow: 10px 10px 5px -8px rgba(138,135,138,1);
+  white-space: nowrap;
+  min-width: 250px;
+  transition: all 0.3s;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  border: 2px solid #ffffff;
+  overflow-y: scroll;
+  max-height: 550px;
+  margin-top: -180px !important;
+}
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  width: 100%;
+}
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+.card{
+  background: rgba(255, 255, 255, 0.1);
+}
+
+#cover {
+  background: url(/js/images/loader.gif) no-repeat scroll center center rgba(183, 183, 183, 0.78);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  /* background: rgba(223, 226, 224, 0.88); */
+  z-index: 100000;
+}
+p.blocktext {
+  width: 6em;
+  color: #983a3a;
+  font-size: x-large;
+  padding: 20% 0;
+  margin: auto;
+  font-weight: bolder;
+}
+
+.indicator-tabs {
+  width: 100%;
+  overflow: hidden;
+ 
+  padding: 0;
+  margin: 0
+}
+.indicator-tabs  dt {
+  float: left;
+  width: 50%;
+  /* adjust the width; make sure the total of both is 100% */
+
+  padding: 0;
+  margin: 0
+}
+.indicator-tabs  dd {
+  float: left;
+  width: 50%;
+  /* adjust the width; make sure the total of both is 100% */
+
+  padding: 0;
+  margin: 0
+}
+.line-bar-txt{  
+  padding: 0 5px;
+  margin: -20px;
+  font-size: 12px;
+  font-weight: bolder;
+  color: darkslategrey;
+}
+/* p.indicator-percent-3 {
+  margin-right: 70px;
+}
+p.indicator-percent-2 {
+  margin-right: 75px;
+} */
