@@ -2,7 +2,7 @@ $('#cover').fadeOut(1000);
 // create icons for bus stop icons (selected and unselected)
 var bus_stop_icon = L.icon({
   iconUrl: '../css/images/bus.png',
-  iconSize: [10, 10]
+  iconSize: [20, 20]
 });
 const color_council = ['#f56942', '#f542a7', '#fa2d2d', '#9ca7c3', '#b88db8', '#fcf18f', '#ade1ad',
                        '#8dc4c2', '#9ca7c3', '#a17ea8','#4287f5', '#42e3f5', '#42f587', '#d7f542', '#f5aa42'];
@@ -72,6 +72,7 @@ const pgh_city_council = $.get("data/pgh_city_council.geojson");
 const pittsburgh_hood = $.get("data/pittsburgh_hood.geojson");
 const bus_routes = $.get("data/bus_routes.geojson");
 const bus_stop = $.get("data/bus_stop.geojson");
+const markers = L.markerClusterGroup({ chunkedLoading: true });
 
 $.when(pgh_city_council, pittsburgh_hood, bus_routes, bus_stop)
   .then((pgh_city_council, pittsburgh_hood, bus_routes, bus_stop) => {
@@ -80,7 +81,7 @@ $.when(pgh_city_council, pittsburgh_hood, bus_routes, bus_stop)
     overlays["Bus Routes"] = L.geoJson(bus_routes, {style: bus_routes_style});
     overlays["Bus Stops"] = L.geoJson(bus_stop, {
           pointToLayer: function (feature, latlng) {
-          return L.marker(latlng, {icon: bus_stop_icon});
+          return markers.addLayer(L.marker(latlng, {icon: bus_stop_icon}));
           // return L.circleMarker(latlng, bus_stop_marker);
           }
         });
