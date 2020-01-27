@@ -48,6 +48,11 @@ const bus_stop_icon = L.icon({
   iconUrl: '../css/images/bus.png',
   iconSize: [20, 20]
 });
+// create icons for bus stop icons (selected and unselected)
+const hacp_icon = L.icon({
+  iconUrl: '../css/images/hacp1.png',
+  iconSize: [24, 24]
+});
 const color_council = ['#f56942', '#f542a7', '#fa2d2d', '#9ca7c3', '#b88db8', '#fcf18f', '#ade1ad',
                        '#8dc4c2', '#9ca7c3', '#a17ea8','#4287f5', '#42e3f5', '#42f587', '#d7f542', '#f5aa42'];
 const grayscale  = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr}),
@@ -62,7 +67,8 @@ const overlays = {
     "Pittsburgh Hood": '',
     "PGH City Council": '',
     "Bus Stops": '',
-    "Bus Routes": ''
+    "Bus Routes": '',
+    "HACP Communities": ''
     };
 
 const map = L.map('map', {
@@ -274,10 +280,11 @@ const pgh_city_council = $.get("data/pgh_city_council.geojson");
 const pittsburgh_hood = $.get("data/pittsburgh_hood.geojson");
 const bus_routes = $.get("data/bus_routes.geojson");
 const bus_stop = $.get("data/bus_stop.geojson");
+const hacp_communities = $.get("data/hacp_communities.geojson");
 const markers = L.markerClusterGroup({ chunkedLoading: true });
 
-$.when(pgh_city_council, pittsburgh_hood, bus_routes, bus_stop)
-  .then((pgh_city_council, pittsburgh_hood, bus_routes, bus_stop) => {
+$.when(pgh_city_council, pittsburgh_hood, bus_routes, bus_stop, hacp_communities)
+  .then((pgh_city_council, pittsburgh_hood, bus_routes, bus_stop, hacp_communities) => {
     overlays["Pittsburgh Hood"] = L.geoJson(pittsburgh_hood, {style: style,
       onEachFeature: function (feature, layer) {
         layer.on('click', function () {
@@ -319,70 +326,14 @@ $.when(pgh_city_council, pittsburgh_hood, bus_routes, bus_stop)
           // return L.circleMarker(latlng, bus_stop_marker);
           }
         });
+    overlays["HACP Communities"] = L.geoJson(hacp_communities, {
+          pointToLayer: function (feature, latlng) {
+          return L.marker(latlng, {icon: hacp_icon});
+          }
+        });
     /** Added control to map */
     L.control.layers(base_layers, overlays).addTo(map);
     map.zoomControl.setPosition('bottomright');
     map.whenReady(()=>$('#cover').fadeOut(1000));
 
   });
-
-
- // load GeoJSON from an external file
-//  $.getJSON("data/pittsburgh_hood.geojson",blkgrp_data=>{
-//     pittsburgh_hood = L.geoJson(blkgrp_data, {style: style,
-//     onEachFeature: function (feature, layer) {
-// 			layer.on('click', function () {
-//         var property = feature.properties;
-//         var indicator_txt_bar = `${(feature.properties[details_indicators]).toFixed(2)}`;
-//         var indicator_value = ''
-//        if((details_indicators === "Median income") || (details_indicators === "Housing value")){
-//         indicator_value = `$${indicator_txt_bar}`;
-//        }else{
-//         indicator_value = `${indicator_txt_bar}%`;
-//        }
-// 			  $('#details').addClass("show");
-//         $('#details > .details-header')[0].innerHTML = `${property.HOOD}`;
-//         $('#geo-location').html(`${property.HOOD}`);
-//         $('.indicator-percent-1').text(indicator_value);
-//         $('.indicator-lbl-1').text(`${details_indicators}`);
-//         $('.line-bar-txt').text(`${indicator_txt_bar}`);
-//         $('.indicator-percent-2').text(`${property["Total population"]}`);
-//         $('.indicator-percent-3').text(`${property["White"].toFixed(2)}`);
-//         var interval_indicator = 0;
-//               threshold_arr(details_indicators).map((indi, index) =>{
-//                 property[details_indicators] < indi ? interval_indicator = (index + 1) * 40 : null;
-//               });
-
-//               $("#line-bar").css("margin-left", `${Math.round(interval_indicator)}px`);
-
-
-// 			});
-// 		}
-//   });
-
-// var grayscale   = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr}),
-//     streets  = L.tileLayer(mbUrl, {id: 'mapbox.streets',   attribution: mbAttr}),
-//     osm_lyr = L.tileLayer( osm_url, {attribution: '&copy; ' + mapLink + ' Contributors', maxZoom: maxZoom,});
-
-
-// var map = L.map('map', {
-// 		center: center,
-//     zoom: zoom,
-//     attributionControl: false,
-// 		layers: [streets, pittsburgh_hood]
-//   });
-
-//     map.zoomControl.setPosition('bottomright');
-//   var baseLayers = {
-//     "Grayscale": grayscale,
-//     "Streets": streets,
-//     "OSM": osm_lyr
-//     };
-
-//   var overlays = {
-//         "Pittsburgh Hood": pittsburgh_hood
-//     };
-
-//   L.control.layers(baseLayers, overlays).addTo(map);
-//     map.whenReady(()=>$('#cover').fadeOut(1000));
-// });
