@@ -1,5 +1,5 @@
 var center = [40.447500, -79.987661],
-    zoom = 11,
+    zoom = 12,
     mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>',
     mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
     '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +

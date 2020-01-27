@@ -51,7 +51,7 @@
           <h6 class="details-header dropdown-header indicator-header-list">Wilkinsburg</h6>
           <hr class="hr-line"/>
           <dl class="multiple-table">
-              <dt><p class="indicator-lbl-1" style="padding:0 50px;">Low Response Score:</p> </dt>
+              <dt><p class="indicator-lbl-1" style="padding:0 50px;">White:</p> </dt>
               <dd><p class="indicator-percent-1" style="padding: 5px;">00.00%</p> </dd>
           </dl>
           <figure>
@@ -65,7 +65,7 @@
               <hr class="hr-line"/>
               <span>Block information </span>
               <dl class="multiple-table">
-                <dt style="margin-bottom: -19px;"><p class="indicator-lbl-3" style="padding:0 50px;">Low Response Score:</p> </dt>
+                <dt style="margin-bottom: -19px;"><p class="indicator-lbl-3" style="padding:0 50px;">White:</p> </dt>
                 <dd style="margin-bottom: -19px;"><p class="indicator-percent-3" style="padding: 5px;">00.00%</p> </dd>
                 <dt><p class="indicator-lbl-3" style="padding:0 50px;">Population:</p> </dt>
                 <dd><p class="indicator-percent-2" style="padding: 5px;">00.00</p> </dd>
@@ -568,6 +568,62 @@
   <script src="js/jqueryui.js"></script>
   <script src="js/selectize.min.js"></script>
   <script src="js/index.js"></script>
+  <script>
+    let hood, variables = [
+      {"variable":"White", "label": "White"}, {"variable":"Black", "label": "Black"},
+      {"variable":"Hispanic", "label": "Hispanic"}, {"variable":"Adult 65+", "label": "Adult 65+"},
+      {"variable":"18-24 years", "label": "18-24 years"},{"variable":"Children Under 6", "label": "Children Under 6"},
+      {"variable":"Single parent", "label": "Single Parent Household"}, {"variable":"Below Poverty", "label": "Below Poverty"},
+      {"variable":"No high school", "label": "No high school"}, {"variable":"Renter Occupied Units", "label": "Renter Occupied Units"},
+      {"variable":"Vacant Units", "label": "Vacant Units"}, {"variable":"Move after 2010", "label": "Move after 2010"},
+      {"variable":"Graduate", "label": "Graduate"}, {"variable":"Total Population", "label": "Total Population"}]
+
+      $.getJSON("data/pittsburgh_hood.geojson",hood_data=>{
+          hood = [...new Set(hood_data.features.map(x => x.properties))]
+      });
+    $('#input-tags').selectize({
+            valueField: 'HOOD',
+            labelField: 'HOOD',
+            searchField: 'HOOD',
+            persist: true,
+            createOnBlur: true,
+            openOnFocus: false,
+	          closeAfterSelect: true,
+            maxItems: 3,
+            options: [],
+            load: function(query, callback) {
+              if (!query.length) return callback();
+              callback(hood);
+            },
+            score: function (search){
+                    return function (option){
+                      if (option.HOOD.indexOf(search) === 0) return 1;
+                      return 0;
+                    }
+            }
+        });
+        $('#variables').selectize({
+            valueField: 'variable',
+            labelField: 'label',
+            searchField: 'variable',
+            persist: true,
+            createOnBlur: true,
+            openOnFocus: false,
+	          closeAfterSelect: true,
+            maxItems: 3,
+            options: [],
+            load: function(query, callback) {
+              if (!query.length) return callback();
+              callback(variables);
+            },
+            score: function (search){
+                    return function (option){
+                      if (option.label.indexOf(search) === 0) return 1;
+                      return 0;
+                    }
+            }
+        });
+      </script>
 </body>
 
 </html>
