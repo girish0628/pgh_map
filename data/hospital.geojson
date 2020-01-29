@@ -1,0 +1,18 @@
+{
+"type": "FeatureCollection",
+"name": "hospital",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Location": "Allegheny General Hospital, Pittsburgh, PA, USA", "Latitude": 40.45717, "Longitude": -80.003317, "Status": "success" }, "geometry": { "type": "Point", "coordinates": [ -80.003317, 40.45717 ] } },
+{ "type": "Feature", "properties": { "Location": "UPMC Mercy, Pittsburgh, PA, USA", "Latitude": 40.43658, "Longitude": -79.985814, "Status": "success" }, "geometry": { "type": "Point", "coordinates": [ -79.985814, 40.43658 ] } },
+{ "type": "Feature", "properties": { "Location": "UPMC Presbyterian Hospital, Pittsburgh, PA, USA", "Latitude": 40.442454, "Longitude": -79.960429, "Status": "success" }, "geometry": { "type": "Point", "coordinates": [ -79.960429, 40.442454 ] } },
+{ "type": "Feature", "properties": { "Location": "UPMC Optical, Pittsburgh, PA, USA", "Latitude": 40.440896, "Longitude": -79.957709, "Status": "success" }, "geometry": { "type": "Point", "coordinates": [ -79.957709, 40.440896 ] } },
+{ "type": "Feature", "properties": { "Location": "VA Pittsburgh Healthcare System - University Drive, Pittsburgh, PA, USA", "Latitude": 40.446554, "Longitude": -79.961726, "Status": "success" }, "geometry": { "type": "Point", "coordinates": [ -79.961726, 40.446554 ] } },
+{ "type": "Feature", "properties": { "Location": "UPMC Montefiore Hospital, Pittsburgh, PA, USA", "Latitude": 40.440603, "Longitude": -79.961427, "Status": "success" }, "geometry": { "type": "Point", "coordinates": [ -79.961427, 40.440603 ] } },
+{ "type": "Feature", "properties": { "Location": "300 Halket St, Pittsburgh, PA, USA", "Latitude": 40.437086, "Longitude": -79.961543, "Status": "doubt" }, "geometry": { "type": "Point", "coordinates": [ -79.961543, 40.437086 ] } },
+{ "type": "Feature", "properties": { "Location": "Bower Hill Road, Pittsburgh, PA, USA", "Latitude": 40.386663, "Longitude": -80.04617, "Status": "doubt" }, "geometry": { "type": "Point", "coordinates": [ -80.04617, 40.386663 ] } },
+{ "type": "Feature", "properties": { "Location": "4800 Friendship Ave, Pittsburgh, PA, USA", "Latitude": 40.462132, "Longitude": -79.946263, "Status": "success" }, "geometry": { "type": "Point", "coordinates": [ -79.946263, 40.462132 ] } },
+{ "type": "Feature", "properties": { "Location": "4401 Penn Ave, Pittsburgh, PA, USA", "Latitude": 40.466425, "Longitude": -79.952994, "Status": "doubt" }, "geometry": { "type": "Point", "coordinates": [ -79.952994, 40.466425 ] } },
+{ "type": "Feature", "properties": { "Location": "3811 O'Hara Street, Pittsburgh, PA, USA", "Latitude": 40.443549, "Longitude": -79.959846, "Status": "doubt" }, "geometry": { "type": "Point", "coordinates": [ -79.959846, 40.443549 ] } }
+]
+}

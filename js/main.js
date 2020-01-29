@@ -329,7 +329,8 @@ $.when(pgh_city_council, pittsburgh_hood, bus_routes, bus_stop, hacp_communities
     overlays["HACP Communities"] = L.geoJson(hacp_communities, {
           pointToLayer: function (feature, latlng) {
           return L.marker(latlng, {icon: hacp_icon});
-          }
+          },
+          onEachFeature: onClickCommunities
         });
     /** Added control to map */
     L.control.layers(base_layers, overlays).addTo(map);
@@ -337,3 +338,16 @@ $.when(pgh_city_council, pittsburgh_hood, bus_routes, bus_stop, hacp_communities
     map.whenReady(()=>$('#cover').fadeOut(1000));
 
   });
+  var popup = L.popup()
+  .setLatLng(center)
+  .setContent("I am a standalone popup.")
+  // .openOn(map);
+
+  function onClickCommunities(feature, layer) {
+    layer.on('click', function (e) {
+      if (feature.properties && feature.properties.Adresses) {
+        layer.bindPopup(feature.properties.Adresses);
+    }
+  });
+
+}
