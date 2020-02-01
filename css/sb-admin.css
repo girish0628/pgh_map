@@ -3273,13 +3273,15 @@ input[type="button"].btn-block {
 
 .dropdown-toggle::after {
   display: inline-block;
+  float: right;
   margin-left: 0.255em;
+  margin-top: 0.5em;
   vertical-align: 0.255em;
   content: "";
-  border-top: 0.3em solid;
-  border-right: 0.3em solid transparent;
+  border-top: 0.4em solid;
+  border-right: 0.4em solid transparent;
   border-bottom: 0;
-  border-left: 0.3em solid transparent;
+  border-left: 0.4em solid transparent;
 }
 
 .dropdown-toggle:empty::after {
@@ -3461,7 +3463,7 @@ input[type="button"].btn-block {
 .dropdown-item {
   display: block;
   width: 100%;
-  padding: 0.25rem 1.5rem;
+  padding: 0.25rem 0;
   clear: both;
   font-weight: 400;
   color: #212529;

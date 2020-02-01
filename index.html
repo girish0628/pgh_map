@@ -111,7 +111,7 @@
                                   </button>
                               </td>
                               <td>
-                                <button type="button" class="btn btn-ico" data-toggle="tooltip" 
+                                <button type="button" class="btn btn-ico" data-toggle="tooltip"
                                         data-placement="right" title="View On Map" onclick="reSetStyle('White')">
                                     <i class="fa fa-map"></i>
                                 </button>
@@ -122,7 +122,7 @@
                                 <button type="button" class="btn btn-indicator">Black</button>
                               </td>
                               <td>
-                                  <button type="button" class="btn btn-ico" data-toggle="tooltip" 
+                                  <button type="button" class="btn btn-ico" data-toggle="tooltip"
                                     data-placement="right" title="Details" onclick="indicator_content('Black', 'Demographic')">
                                       <i class="fa fa-info"></i>
                                   </button>
@@ -190,13 +190,13 @@
                                 <button type="button" class="btn btn-indicator">Under 6 yrs</button>
                               </td>
                               <td>
-                                  <button type="button" class="btn btn-ico" data-toggle="tooltip" 
+                                  <button type="button" class="btn btn-ico" data-toggle="tooltip"
                                         data-placement="right" title="Details" onclick="indicator_content('Under 6 yrs', 'Demographic')">
                                       <i class="fa fa-info"></i>
                                   </button>
                               </td>
                               <td>
-                                  <button type="button" class="btn btn-ico" data-toggle="tooltip" 
+                                  <button type="button" class="btn btn-ico" data-toggle="tooltip"
                                         data-placement="right" title="View On Map" onclick="reSetStyle('Under 6 yrs')">
                                       <i class="fa fa-map"></i>
                                   </button>
@@ -207,13 +207,13 @@
                                 <button type="button" class="btn btn-indicator">Single Parent</button>
                               </td>
                               <td>
-                                  <button type="button" class="btn btn-ico" data-toggle="tooltip" 
+                                  <button type="button" class="btn btn-ico" data-toggle="tooltip"
                                           data-placement="right" title="Details"  onclick="indicator_content('Single Parent', 'Demographic')">
                                       <i class="fa fa-info"></i>
                                   </button>
                               </td>
                               <td>
-                                  <button type="button" class="btn btn-ico" data-toggle="tooltip" 
+                                  <button type="button" class="btn btn-ico" data-toggle="tooltip"
                                         data-placement="right" title="View On Map" onclick="reSetStyle('Single parent')">
                                       <i class="fa fa-map"></i>
                                   </button>
@@ -499,9 +499,43 @@
     <div id="content-wrapper">
       <div id="map">
           <div class="l-center">
-              <p>Hard-to-Count Communities</p>
-              <div class="blk-grp" id="geo-level">Block group</div>
-              <div class="blk-grp" id="geo-location">Wilkinsburg</div>
+              <p>Learn more about HACP communities</p>
+              <!-- <div class="blk-grp" id="geo-level"> -->
+                <div class="dropdown">
+                  <button type="button" class="btn btn-primary dropdown-toggle" style="width: 100%;" data-toggle="dropdown">
+                    Pick an HACP community
+                  </button>
+                  <div class="dropdown-menu" style="width: 100%;">
+                    <ul id="hacp_list">
+                      <!-- <li class="dropdown-item">Pick an HACP community</li> -->
+                    </ul>
+                    <!-- <a class="dropdown-item" href="#">Link 1</a>
+                    <a class="dropdown-item" href="#">Link 2</a>
+                    <a class="dropdown-item" href="#">Link 3</a> -->
+                  </div>
+                </div>
+              <!-- </div> -->
+              <!-- <div class="blk-grp" id="geo-location"> -->
+                <div class="blk-grp" id="geo-location">Explore accessibility </div>
+                  <div class="box flex">
+                    <p>
+                      <img src="css/images/hospital.png" class="img-ico" width="75">
+                      Hospital!
+                    </p>
+                    <p>
+                      <img src="css/images/grocery.png" class="img-ico" width="75">
+                      Grocery
+                    </p>
+                    <p>
+                      <img src="css/images/bus_stops.png" class="img-ico" width="75">
+                      Stops
+                    </p>
+                    <p>
+                      <img src="css/images/bus_route.png" class="img-ico" width="75">
+                      Routes
+                    </p>
+                  </div>
+              <!-- </div> -->
               <div class="info-footer">Drag to change map display</div>
            </div>
       </div>

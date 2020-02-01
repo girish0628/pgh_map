@@ -285,6 +285,7 @@ const markers = L.markerClusterGroup({ chunkedLoading: true });
 
 $.when(pgh_city_council, pittsburgh_hood, bus_routes, bus_stop, hacp_communities)
   .then((pgh_city_council, pittsburgh_hood, bus_routes, bus_stop, hacp_communities) => {
+    addListCommunities(hacp_communities);
     overlays["Pittsburgh Hood"] = L.geoJson(pittsburgh_hood, {style: style,
       onEachFeature: function (feature, layer) {
         layer.on('click', function () {
@@ -345,9 +346,22 @@ $.when(pgh_city_council, pittsburgh_hood, bus_routes, bus_stop, hacp_communities
 
   function onClickCommunities(feature, layer) {
     layer.on('click', function (e) {
-      if (feature.properties && feature.properties.Adresses) {
-        layer.bindPopup(feature.properties.Adresses);
+      if (feature.properties && feature.properties.Addresses) {
+        layer.bindPopup(feature.properties.Addresses);
     }
   });
 
+}
+
+function addListCommunities(hacp_communities_data){
+  const hacp_communities = [...new Set(hacp_communities_data[0].features.map(x => x.properties))];
+
+    const hacp_list = $('#hacp_list');
+
+    $.each(hacp_communities, function(val, text) {
+      debugger;
+        // options[options.length] = new Option(text, val);
+        // $('#hacp_list').append('<li><a href="#">New list item</a></li>');
+        $('#hacp_list').append(`<li class="dropdown-item hacp-list">${text.Addresses.split(',')[0]}</li>`);
+    });
 }

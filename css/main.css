@@ -61,19 +61,75 @@ html, body, #map {
 }
 .blk-grp{
   background: #fff;
-  text-align: center;
-  padding: 7px 30px;
-  width: 200px;
-  margin: 10px 63px;
+  text-align: left;
+  padding: 10px 30px;
+  width: 100%;
+  margin: 20px 0 0 0;
   font-size: 15px;
   -webkit-box-shadow: 10px 10px 5px -8px rgba(138,135,138,1);
   -moz-box-shadow: 10px 10px 5px -8px rgba(138,135,138,1);
   box-shadow: 4px 4px 6px -4px rgba(138,135,138,1);
   /* white-space: nowrap; */
   overflow: hidden;
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-align: center;
+  font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
 }
+.img-ico{
+  height: 30px;
+  width: 30px;
+}
+#hacp_list{
+  padding: 10px;
+}
+.box.flex {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+.hacp-list{
+  /* box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 15px; */
+  text-align: left;
+  background: rgba(239, 238, 237, 0.78);
+  padding: 8px;
+  border-radius: 5px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: rgb(255, 255, 255);
+}
+.box {
+  /* padding: .5rem; */
+  margin: -5px 0 20px 0;
+  height: 60px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.03);
+  border-radius: 4px;
+  color: #84613D;
+  font-family: "Lucida Console", Monaco, monospace;
+  background: #FDF9EA;
+  border-bottom: 1px solid #F9F2D6;
+  border-right: 1px solid #F9F2D6;
+}
+
+.box p {
+  max-width: 125px;
+  text-align: center;
+  background: rgba(255,255,255,0.5);
+  margin: .25rem;
+  padding: .25rem;
+  font-size: 12px;
+  font-weight: bolder;
+  background: #efeeedc7;
+  padding: 3px 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  border: 2px solid #ffffff;
+  width: 350px;
+  cursor: pointer;
+}
+
 .l-center > p{
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: bold;
   line-height: 21px;
   text-align: center;
