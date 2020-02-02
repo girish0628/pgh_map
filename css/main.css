@@ -97,6 +97,7 @@ html, body, #map {
   border-width: 2px;
   border-style: solid;
   border-color: rgb(255, 255, 255);
+  cursor: pointer;
 }
 .box {
   /* padding: .5rem; */

@@ -1,7 +1,8 @@
 
 // let pittsburgh_hood;
 let details_indicators = "White";
-
+let hacp_communities_marker, hospitals_marker, marker_zoom = 13;
+let hospitals_ids = "";
 const threshold_arr = (indicator_val) =>{
   switch(indicator_val) {
     case "White":
@@ -46,6 +47,11 @@ const threshold_arr = (indicator_val) =>{
 // create icons for bus stop icons (selected and unselected)
 const bus_stop_icon = L.icon({
   iconUrl: '../css/images/bus.png',
+  iconSize: [20, 20]
+});
+// create icons for bus stop icons (selected and unselected)
+const hospitals_icon = L.icon({
+  iconUrl: '../css/images/hospital.png',
   iconSize: [20, 20]
 });
 // create icons for bus stop icons (selected and unselected)
@@ -282,6 +288,7 @@ const bus_routes = $.get("data/bus_routes.geojson");
 const bus_stop = $.get("data/bus_stop.geojson");
 const hacp_communities = $.get("data/hacp_communities.geojson");
 const markers = L.markerClusterGroup({ chunkedLoading: true });
+const hospitalGroup = L.layerGroup().addTo(map);
 
 $.when(pgh_city_council, pittsburgh_hood, bus_routes, bus_stop, hacp_communities)
   .then((pgh_city_council, pittsburgh_hood, bus_routes, bus_stop, hacp_communities) => {
@@ -355,13 +362,37 @@ $.when(pgh_city_council, pittsburgh_hood, bus_routes, bus_stop, hacp_communities
 
 function addListCommunities(hacp_communities_data){
   const hacp_communities = [...new Set(hacp_communities_data[0].features.map(x => x.properties))];
-
-    const hacp_list = $('#hacp_list');
-
     $.each(hacp_communities, function(val, text) {
-      debugger;
-        // options[options.length] = new Option(text, val);
-        // $('#hacp_list').append('<li><a href="#">New list item</a></li>');
-        $('#hacp_list').append(`<li class="dropdown-item hacp-list">${text.Addresses.split(',')[0]}</li>`);
+      hospitals_ids = text.hospitals
+        $('#hacp_list').append(`<li onclick="addMarker(${text.Latitude}, ${text.Longitude}, '${text.hospitals}')" class="dropdown-item hacp-list">${text.Addresses.split(',')[0]}</li>`);
     });
+}
+function addMarker(lat, lng, ids){
+  hospitals_ids = ids;
+  if(hospitalGroup) hospitalGroup.clearLayers();
+  $(".dropdown-menu").removeClass('show');
+  if(hacp_communities_marker) hacp_communities_marker.remove();
+  if(hospitals_marker) hospitals_marker.remove();
+  hacp_communities_marker = L.marker([lat, lng]).addTo(map);
+  map.flyTo([lat, lng], marker_zoom);
+  $('#hacp_list').focus();
+  return false;
+}
+const hospitals = $.get("data/hospital.geojson");
+let hospitals_data;
+$.when(hospitals)
+.then((hospitals) => {
+  hospitals_data = hospitals;
+});
+
+function addAccessabilityMarkers(){
+//HACP Communities Co-ordinates to create circle
+      let ids_array = hospitals_ids.toString().split(',');
+      hospitals_marker = L.geoJson(hospitals_data, {
+        pointToLayer: function (feature, latlng) {
+          if(ids_array.includes(feature.properties.id.toString())){
+              return L.marker(latlng, {icon: hospitals_icon}).addTo(hospitalGroup);
+            }
+        }
+      });
 }
