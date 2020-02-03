@@ -1,8 +1,8 @@
 
 // let pittsburgh_hood;
 let details_indicators = "White";
-let hacp_communities_marker, hospitals_marker, marker_zoom = 13;
-let hospitals_ids = "";
+let hacp_communities_marker, hospitals_marker, grocery_marker, bus_stop_marker, marker_zoom = 13;
+let hospitals_ids = "", grocery_ids = "", bus_stop_ids = "";
 const threshold_arr = (indicator_val) =>{
   switch(indicator_val) {
     case "White":
@@ -44,6 +44,11 @@ const threshold_arr = (indicator_val) =>{
   }
 }
 
+// create icons for grocery icons (selected and unselected)
+const grocery_icon = L.icon({
+  iconUrl: '../css/images/grocery.png',
+  iconSize: [20, 20]
+});
 // create icons for bus stop icons (selected and unselected)
 const bus_stop_icon = L.icon({
   iconUrl: '../css/images/bus.png',
@@ -72,7 +77,7 @@ const base_layers = {
 const overlays = {
     "Pittsburgh Hood": '',
     "PGH City Council": '',
-    "Bus Stops": '',
+    // "Bus Stops": '',
     "Bus Routes": '',
     "HACP Communities": ''
     };
@@ -93,7 +98,7 @@ const pgh_city_council_style = feature => {
     fillOpacity: 0.7
    }
 };
-const bus_stop_marker = {
+const bus_stop_style = {
   radius: 3,
   fillColor: "#ff7800",
   color: "#000",
@@ -285,13 +290,15 @@ const reSetStyle = (indicator) =>{
 const pgh_city_council = $.get("data/pgh_city_council.geojson");
 const pittsburgh_hood = $.get("data/pittsburgh_hood.geojson");
 const bus_routes = $.get("data/bus_routes.geojson");
-const bus_stop = $.get("data/bus_stop.geojson");
+// const bus_stop = $.get("data/bus_stop.geojson");
 const hacp_communities = $.get("data/hacp_communities.geojson");
 const markers = L.markerClusterGroup({ chunkedLoading: true });
 const hospitalGroup = L.layerGroup().addTo(map);
+const groceryGroup = L.layerGroup().addTo(map);
+const busStopGroup = L.layerGroup().addTo(map);
 
-$.when(pgh_city_council, pittsburgh_hood, bus_routes, bus_stop, hacp_communities)
-  .then((pgh_city_council, pittsburgh_hood, bus_routes, bus_stop, hacp_communities) => {
+$.when(pgh_city_council, pittsburgh_hood, bus_routes, hacp_communities)
+  .then((pgh_city_council, pittsburgh_hood, bus_routes, hacp_communities) => {
     addListCommunities(hacp_communities);
     overlays["Pittsburgh Hood"] = L.geoJson(pittsburgh_hood, {style: style,
       onEachFeature: function (feature, layer) {
@@ -328,12 +335,12 @@ $.when(pgh_city_council, pittsburgh_hood, bus_routes, bus_stop, hacp_communities
 
 
     overlays["Bus Routes"] = L.geoJson(bus_routes, {style: bus_routes_style});
-    overlays["Bus Stops"] = L.geoJson(bus_stop, {
-          pointToLayer: function (feature, latlng) {
-          return markers.addLayer(L.marker(latlng, {icon: bus_stop_icon}));
-          // return L.circleMarker(latlng, bus_stop_marker);
-          }
-        });
+    // overlays["Bus Stops"] = L.geoJson(bus_stop, {
+    //       pointToLayer: function (feature, latlng) {
+    //       return markers.addLayer(L.marker(latlng, {icon: bus_stop_icon}));
+    //       // return L.circleMarker(latlng, bus_stop_marker);
+    //       }
+    //     });
     overlays["HACP Communities"] = L.geoJson(hacp_communities, {
           pointToLayer: function (feature, latlng) {
           return L.marker(latlng, {icon: hacp_icon});
@@ -363,12 +370,16 @@ $.when(pgh_city_council, pittsburgh_hood, bus_routes, bus_stop, hacp_communities
 function addListCommunities(hacp_communities_data){
   const hacp_communities = [...new Set(hacp_communities_data[0].features.map(x => x.properties))];
     $.each(hacp_communities, function(val, text) {
-      hospitals_ids = text.hospitals
-        $('#hacp_list').append(`<li onclick="addMarker(${text.Latitude}, ${text.Longitude}, '${text.hospitals}')" class="dropdown-item hacp-list">${text.Addresses.split(',')[0]}</li>`);
+        $('#hacp_list').append(`<li onclick="addMarker(${text.Latitude}, ${text.Longitude}, '${text.hospitals}', '${text.grocery}', '${text.bus_stop}')" class="dropdown-item hacp-list">${text.Addresses.split(',')[0]}</li>`);
     });
 }
-function addMarker(lat, lng, ids){
-  hospitals_ids = ids;
+function addMarker(lat, lng, hospitals_id, grocery_id, bus_stop_id){
+  hospitals_ids = hospitals_id;
+  grocery_ids = grocery_id;
+  bus_stop_ids = bus_stop_id;
+
+  if(hospitalGroup) hospitalGroup.clearLayers();
+  if(groceryGroup) groceryGroup.clearLayers();
   if(hospitalGroup) hospitalGroup.clearLayers();
   $(".dropdown-menu").removeClass('show');
   if(hacp_communities_marker) hacp_communities_marker.remove();
@@ -378,21 +389,48 @@ function addMarker(lat, lng, ids){
   $('#hacp_list').focus();
   return false;
 }
-const hospitals = $.get("data/hospital.geojson");
-let hospitals_data;
-$.when(hospitals)
-.then((hospitals) => {
-  hospitals_data = hospitals;
-});
 
-function addAccessabilityMarkers(){
-//HACP Communities Co-ordinates to create circle
-      let ids_array = hospitals_ids.toString().split(',');
-      hospitals_marker = L.geoJson(hospitals_data, {
-        pointToLayer: function (feature, latlng) {
-          if(ids_array.includes(feature.properties.id.toString())){
-              return L.marker(latlng, {icon: hospitals_icon}).addTo(hospitalGroup);
-            }
-        }
+const hospitals = $.get("data/hospital.geojson");
+const grocery = $.get("data/grocerystore.geojson");
+const bus_stop = $.get("data/bus_stop.geojson");
+let hospitals_data;
+$.when(hospitals, grocery, bus_stop)
+      .then((hospitals, grocery, bus_stop) => {
+          hospitals_data = hospitals;
+          grocery_data = grocery;
+          bus_stop_data = bus_stop;
       });
-}
+function hospitalMarkers(){
+  //HACP Communities Co-ordinates to create circle
+        let ids_array = hospitals_ids.toString().split(',');
+        hospitals_marker = L.geoJson(hospitals_data, {
+          pointToLayer: function (feature, latlng) {
+            if(ids_array.includes(feature.properties.id.toString())){
+                return L.marker(latlng, {icon: hospitals_icon}).addTo(hospitalGroup);
+              }
+          }
+        });
+  }
+  function groceryMarkers(){
+    //HACP Communities Co-ordinates to create circle
+          let ids_array = grocery_ids.toString().split(',');
+          grocery_marker = L.geoJson(grocery_data, {
+            pointToLayer: function (feature, latlng) {
+              if(ids_array.includes(feature.properties.id.toString())){
+                  return L.marker(latlng, {icon: grocery_icon}).addTo(groceryGroup);
+                }
+            }
+          });
+    }
+  function busStopMarkers(){
+    //HACP Communities Co-ordinates to create circle
+          let ids_array = bus_stop_ids.toString().split(',');
+          bus_stop_marker = L.geoJson(bus_stop_data, {
+            pointToLayer: function (feature, latlng) {
+              if(ids_array.includes(feature.properties.id.toString())){
+                  // return L.marker(latlng, {icon: bus_stop_icon}).addTo(busStopGroup);
+                  return markers.addLayer(L.marker(latlng, {icon: bus_stop_icon})).addTo(busStopGroup);
+                }
+            }
+          });
+    }
