@@ -6,39 +6,33 @@ let hospitals_ids = "", grocery_ids = "", bus_stop_ids = "";
 const threshold_arr = (indicator_val) =>{
   switch(indicator_val) {
     case "White":
-      return [59.638, 81.206, 90.078, 96.100];
+      return [26.77000, 61.96798, 74.80382, 84.27372];
     case "Black":
-      return [1.0, 2.632, 7.190, 27.166];
+      return [5.125296, 10.378930, 31.222578, 65.246184];
     case "Hispanic":
-      return [0.500, 1.438, 3.480, 12.0];
+      return [0.5685608, 1.8745417, 2.6076115, 3.7038109];
     case "Adult 65+":
-      return [10.836, 14.922, 18.414, 23.580];
+      return [10.68706, 12.73242, 15.25285, 18.33191];
     case "18-24 years":
-      return [3.612, 5.592, 7.720, 11.850];
+      return [5.622745, 7.729640, 10.160014, 13.813545];
     case "Under 6 yrs":
-      return [1.940, 3.690, 5.380, 7.958 ];
+      return [2.449595, 4.024039, 6.142116, 7.453966];
     case "Single parent":
-      return [54.95, 72.66, 86.38, 95.94];
+      return [47.86160, 59.89031, 72.27431, 83.89457];
     case "Below poverty":
-      return [3.37, 7.38, 13.10, 24.33];
+      return [12.20992, 17.28467, 24.24932, 34.63026];
     case "No high school":
-      return [1.880, 4.110, 6.538, 10.814];
-    case "Median income":
-      return [34566.8, 47083.0, 58595.8, 76715.8];
+      return [5.114027, 7.577430 , 9.864903, 14.127499];
     case "Renter Occupied Units":
-      return [11.33, 25.54, 40.58, 59.84];
+      return [31.54139, 48.33985, 57.69136, 70.29030];
     case "Vacant Units":
-      return [2.14, 6.45, 10.69, 18.07];
+      return [6.70697, 11.02293, 16.01130, 20.85960];
     case "Move after 2010":
-      return [18.490, 26.604, 35.060, 45.486];
-    case "Housing value":
-      return [69460, 96720, 133120, 191520 ];
+      return [27.73759, 36.03926, 42.61636, 55.29848];
     case "Graduate":
-      return [17.428, 26.764, 38.096, 55.658];
+      return [12.16435, 21.82644, 34.79515, 50.00000];
     case "Total population":
-      return [648.8, 867.0, 1126.4, 1494.2];
-    case "Low Response Score":
-      return [10.2, 14.6, 18.7, 23.3];
+      return [938.4, 1885.4, 3114.2, 5577.6];
     default:
       return [0, 20, 50, 90]
   }
