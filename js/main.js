@@ -177,14 +177,10 @@ function generateTable(table, data) {
     }
   }
 }
-function indicators_cards(){
-  $.getJSON("data/indicators_qa.json",indicators_qa=>{
-    // muncipality = [...new Set(blkgrp_data.features.map(x => x.properties))]
-});
-
-
-
-}
+// function indicators_cards(){
+//   $.getJSON("data/indicators_qa.json",indicators_qa=>{
+//     // muncipality = [...new Set(blkgrp_data.features.map(x => x.properties))]
+// });}
 function indicator_back(){
   $('#indicator-demographic').toggleClass('d-none');
   $('.demo-content').toggleClass('d-none');
@@ -307,7 +303,7 @@ $.when(pgh_city_council, pittsburgh_hood, bus_routes, hacp_communities)
          }
           $('#details').addClass("show");
           $('#details > .details-header')[0].innerHTML = `${property.HOOD}`;
-          $('#geo-location').html(`${property.HOOD}`);
+          // $('#geo-location').html(`${property.HOOD}`);
           $('.indicator-lbl-1').text(`${details_indicators}`);
           $('.indicator-percent-1').text(indicator_value);
           $('.line-bar-txt').text(`${indicator_txt_bar}`);
@@ -374,7 +370,11 @@ function addMarker(lat, lng, hospitals_id, grocery_id, bus_stop_id){
 
   if(hospitalGroup) hospitalGroup.clearLayers();
   if(groceryGroup) groceryGroup.clearLayers();
-  if(hospitalGroup) hospitalGroup.clearLayers();
+  if(busStopGroup) busStopGroup.clearLayers();
+  $("#hospital-marker").removeClass("select-marker");
+  $("#grocery-marker").removeClass("select-marker");
+  $("#bus-stop-marker").removeClass("select-marker");
+
   $(".dropdown-menu").removeClass('show');
   if(hacp_communities_marker) hacp_communities_marker.remove();
   if(hospitals_marker) hospitals_marker.remove();
@@ -395,8 +395,11 @@ $.when(hospitals, grocery, bus_stop)
           bus_stop_data = bus_stop;
       });
 function hospitalMarkers(){
-  //HACP Communities Co-ordinates to create circle
-        let ids_array = hospitals_ids.toString().split(',');
+  $("#hospital-marker").toggleClass("select-marker");
+  if (!$('#hospital-marker').hasClass('select-marker')){
+    return hospitalGroup.clearLayers();
+  }
+    let ids_array = hospitals_ids.toString().split(',');
         hospitals_marker = L.geoJson(hospitals_data, {
           pointToLayer: function (feature, latlng) {
             if(ids_array.includes(feature.properties.id.toString())){
@@ -406,10 +409,13 @@ function hospitalMarkers(){
         });
   }
   function groceryMarkers(){
-    //HACP Communities Co-ordinates to create circle
-          let ids_array = grocery_ids.toString().split(',');
-          grocery_marker = L.geoJson(grocery_data, {
-            pointToLayer: function (feature, latlng) {
+    $("#grocery-marker").toggleClass("select-marker");
+    if (!$('#grocery-marker').hasClass('select-marker')){
+      return groceryGroup.clearLayers();
+    }
+  let ids_array = grocery_ids.toString().split(',');
+      grocery_marker = L.geoJson(grocery_data, {
+        pointToLayer: function (feature, latlng) {
               if(ids_array.includes(feature.properties.id.toString())){
                   return L.marker(latlng, {icon: grocery_icon}).addTo(groceryGroup);
                 }
@@ -417,13 +423,16 @@ function hospitalMarkers(){
           });
     }
   function busStopMarkers(){
-    //HACP Communities Co-ordinates to create circle
-          let ids_array = bus_stop_ids.toString().split(',');
-          bus_stop_marker = L.geoJson(bus_stop_data, {
-            pointToLayer: function (feature, latlng) {
+    $("#bus-stop-marker").toggleClass("select-marker");
+    if (!$('#bus-stop-marker').hasClass('select-marker')){
+      return busStopGroup.clearLayers();
+    }
+  let ids_array = bus_stop_ids.toString().split(',');
+      bus_stop_marker = L.geoJson(bus_stop_data, {
+          pointToLayer: function (feature, latlng) {
               if(ids_array.includes(feature.properties.id.toString())){
                   // return L.marker(latlng, {icon: bus_stop_icon}).addTo(busStopGroup);
-                  return markers.addLayer(L.marker(latlng, {icon: bus_stop_icon})).addTo(busStopGroup);
+                  return L.marker(latlng, {icon: bus_stop_icon}).addTo(busStopGroup);
                 }
             }
           });

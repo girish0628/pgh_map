@@ -397,57 +397,7 @@
             </div>
           </div>
       </li>
-      <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="rank" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-level-up"></i>
-              <span>Rank</span>
-          </a>
-          <div class="dropdown-menu details" aria-labelledby="rank" style="height: 350px;">
-            <div id="indicators-content">
-            <span class="close" onclick="close_panel(this)">x</span>
-            <h6 class="dropdown-header rank-header-list">Rank</h6>
-             <hr class="hr-line"/>
-            <p class="block-info-header rank-info">Select locations using the search bar. Census blocks within your selected geography will then be ranked by the selected indicators. 
-            </p>
-             <hr class="hr-line"/>
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm">
-                        <div class="control-group auto-search">
-                            <input type="text" id="input-tags"
-                            placeholder="Ex: Wilkinsburg, Braddock"
-                            class=""
-                            value=""/>
-                            <small class="form-text help-txt text-muted">Select maximum of 3 boroughs.</small>
-                        </div>
-                    </div>
-                </div>
-                <br/>
-                <div class="row">
-                    <div class="col-sm">
-                        <div class="control-group auto-search">
-                            <!-- <label for="input-tags">Tags:</label> -->
-                            <input type="text" id="variables"
-                            placeholder="Ex: Below poverty, Graduate"
-                            class=""
-                            value="">
-                            <small class="form-text help-txt text-muted">Select maximum of 3 indicators.</small>
-                          </div>
-                    </div>
-                </div>
-                <br/>
-            </div>
-             <button type="button" class="btn btn-indicator-list rank-btn" onclick="rank_content(this)">Submit</button>
-          </div>
-              <div class="d-none" id="indicator-res">
-                <button type="button" class="btn btn-indicator-list rank-btn-back" onclick="rank_back()">
-                  <i class="fa fa-angle-left"></i> Back
-                </button>
-                      <table class="table borderless" id="table">
-                          </table>
-              </div>
-        </div>
-        </li>
+
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="about" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fa fa-question"></i>
@@ -484,15 +434,15 @@
               <!-- <div class="blk-grp" id="geo-location"> -->
                 <div class="blk-grp" id="geo-location">Explore accessibility </div>
                   <div class="box flex">
-                    <p onclick="hospitalMarkers()">
+                    <p onclick="hospitalMarkers()" id="hospital-marker">
                       <img src="css/images/hospital.png" class="img-ico" width="75">
                       Hospital!
                     </p>
-                    <p onclick="groceryMarkers()">
+                    <p onclick="groceryMarkers()" id="grocery-marker">
                       <img src="css/images/grocery.png" class="img-ico" width="75">
                       Grocery
                     </p>
-                    <p onclick="busStopMarkers()">
+                    <p onclick="busStopMarkers()" id="bus-stop-marker">
                       <img src="css/images/bus_stops.png" class="img-ico" width="75">
                       Stops
                     </p>

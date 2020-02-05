@@ -673,7 +673,7 @@ p.blocktext {
   padding: 0;
   margin: 0
 }
-.line-bar-txt{  
+.line-bar-txt{
   padding: 0 5px;
   margin: -20px;
   font-size: 12px;
@@ -686,3 +686,6 @@ p.blocktext {
 p.indicator-percent-2 {
   margin-right: 75px;
 } */
+p.select-marker{
+  background: #cac5bb;
+}
