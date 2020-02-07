@@ -58,6 +58,7 @@ html, body, #map {
     text-align: center;
     border: 2px solid #ffffff;
     width: 350px;
+    font-family: Helvetic;
 }
 .blk-grp{
   background: #fff;
@@ -74,11 +75,12 @@ html, body, #map {
   font-size: 1.3rem;
   font-weight: bold;
   text-align: center;
-  font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
+  font-family: Helvetic;
 }
 .img-ico{
   height: 30px;
   width: 30px;
+  font-family: Helvetic;
 }
 #hacp_list{
   padding: 10px;
@@ -127,14 +129,15 @@ html, body, #map {
   border: 2px solid #ffffff;
   width: 350px;
   cursor: pointer;
+  font-family: Helvetic;
 }
 
 .l-center > p{
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: bold;
   line-height: 21px;
   text-align: center;
-  font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
+  font-family: Helvetic;
 }
 .info-footer{
   background: #ffffffa3;
@@ -428,6 +431,7 @@ dl.multiple-table dd.first { border-top: 1px solid #999; }
   background-color: #2EA5AA;
   border-color: #2EA5AA;
   border-radius: 0;
+  font-family: Helvetic;
 }
 .btn-indicator-list:hover{
   /* width: 100px; */
@@ -435,6 +439,7 @@ dl.multiple-table dd.first { border-top: 1px solid #999; }
   background-color: rgb(52, 137, 139);
   border-color: rgb(52, 137, 139);
   border-radius: 0;
+  font-family: Helvetic;
 }
 .card-header {
   padding: 0px;
@@ -675,8 +680,8 @@ p.blocktext {
 }
 .line-bar-txt{
   padding: 0 5px;
-  margin: -20px;
-  font-size: 12px;
+  margin: -30px;
+  font-size: 1.2rem;
   font-weight: bolder;
   color: darkslategrey;
 }

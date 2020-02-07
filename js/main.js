@@ -69,8 +69,8 @@ const base_layers = {
           "OSM": osm_lyr
           };
 const overlays = {
-    "Pittsburgh Hood": '',
-    "PGH City Council": '',
+    "City of Pittsburgh Neighborhoods": '',
+    "City of Pittsburgh Council Districts": '',
     // "Bus Stops": '',
     "Bus Routes": '',
     "HACP Communities": ''
@@ -88,7 +88,7 @@ const pgh_city_council_style = feature => {
     weight: 2,
     opacity: 1,
     color: '#fa2d2d',
-    dashArray: '3',
+    // dashArray: '3',
     fillOpacity: 0.7
    }
 };
@@ -270,7 +270,7 @@ createContainer(40, 200, "#container");
 
 const reSetStyle = (indicator) =>{
   details_indicators = indicator;
-  overlays["Pittsburgh Hood"].eachLayer(function (layer) {
+  overlays["City of Pittsburgh Neighborhoods"].eachLayer(function (layer) {
     var feature = layer.feature;
       layer.setStyle(style(feature, indicator))
 
@@ -290,7 +290,7 @@ const busStopGroup = L.layerGroup().addTo(map);
 $.when(pgh_city_council, pittsburgh_hood, bus_routes, hacp_communities)
   .then((pgh_city_council, pittsburgh_hood, bus_routes, hacp_communities) => {
     addListCommunities(hacp_communities);
-    overlays["Pittsburgh Hood"] = L.geoJson(pittsburgh_hood, {style: style,
+    overlays["City of Pittsburgh Neighborhoods"] = L.geoJson(pittsburgh_hood, {style: style,
       onEachFeature: function (feature, layer) {
         layer.on('click', function () {
           var property = feature.properties;
@@ -304,8 +304,8 @@ $.when(pgh_city_council, pittsburgh_hood, bus_routes, hacp_communities)
           $('#details').addClass("show");
           $('#details > .details-header')[0].innerHTML = `${property.HOOD}`;
           // $('#geo-location').html(`${property.HOOD}`);
-          $('.indicator-lbl-1').text(`${details_indicators}`);
-          $('.indicator-percent-1').text(indicator_value);
+          // $('.indicator-lbl-1').text(`${details_indicators}`);
+          // $('.indicator-percent-1').text(indicator_value);
           $('.line-bar-txt').text(`${indicator_txt_bar}`);
           $('.indicator-percent-2').text(`${property["Total population"]}`);
           $('.indicator-percent-3').text(`${property["White"].toFixed(2)}`);
@@ -320,8 +320,8 @@ $.when(pgh_city_council, pittsburgh_hood, bus_routes, hacp_communities)
       }
     });
 
-    map.addLayer(overlays["Pittsburgh Hood"]);
-    overlays["PGH City Council"] = L.geoJson(pgh_city_council, {style: pgh_city_council_style});
+    map.addLayer(overlays["City of Pittsburgh Neighborhoods"]);
+    overlays["City of Pittsburgh Council Districts"] = L.geoJson(pgh_city_council, {style: pgh_city_council_style});
 
 
     overlays["Bus Routes"] = L.geoJson(bus_routes, {style: bus_routes_style});
